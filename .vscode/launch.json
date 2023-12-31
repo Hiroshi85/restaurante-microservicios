@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AtencionApplication<atencion>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.elbh.atencion.AtencionApplication",
+            "projectName": "atencion",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ComidaApplication<comida>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.elbh.comida.ComidaApplication",
+            "projectName": "comida",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DetallePedidoApplication<detalle_pedido>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.elbh.detalle_pedido.DetallePedidoApplication",
+            "projectName": "detalle_pedido",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

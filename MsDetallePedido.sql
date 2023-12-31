@@ -7,5 +7,5 @@ create table detalle_pedido(
     id_pedido int not null,
     id_plato int not null,
     cantidad int not null,
-    precio_unitario decimal(8,2) not null
+    precio decimal(8,2) not null
 );
