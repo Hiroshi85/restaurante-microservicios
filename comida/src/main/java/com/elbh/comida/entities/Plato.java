@@ -1,4 +1,4 @@
-package com.elbh.comida.entidades;
+package com.elbh.comida.entities;
 
 import java.sql.Timestamp;
 

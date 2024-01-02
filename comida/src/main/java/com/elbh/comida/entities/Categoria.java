@@ -1,4 +1,4 @@
-package com.elbh.comida.entidades;
+package com.elbh.comida.entities;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;
@@ -20,6 +20,5 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Basic
     private String descripcion;
 }
