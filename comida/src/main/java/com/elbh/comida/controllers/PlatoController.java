@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elbh.comida.dto.PlatoRequestDTO;
+import com.elbh.comida.dto.PlatoResponse;
 import com.elbh.comida.entities.Plato;
 import com.elbh.comida.services.PlatoService;
 
@@ -29,8 +30,16 @@ public class PlatoController {
     }
 
     @GetMapping("/{id}")
-    public Plato show(@PathVariable Integer id){
-        return platoService.getPlato(id);
+    public PlatoResponse show(@PathVariable Integer id){
+        Plato plato = platoService.getPlato(id);
+        PlatoResponse res = new PlatoResponse(
+            plato.getId(),
+            plato.getDescripcion(),
+            plato.getPrecio(),
+            plato.getCreatedAt(),
+            plato.getCategoria().getDescripcion()
+        );
+        return res;
     }
 
     @PostMapping

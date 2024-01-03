@@ -1,7 +1,5 @@
 package com.elbh.detalle_pedido.entidades;
 
-import com.elbh.detalle_pedido.entidades.models.Plato;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +8,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DetallePedidoPlato {
-    private int id;
-    private int id_pedido;
-    private int cantidad;
-    private double precio;
-    private Plato plato;
+    private Integer id;
+    private Integer id_pedido;
+    private Integer id_plato;
+    private Integer cantidad;
+    private String descripcion;
+    private Double precio;
+
+    public DetallePedidoPlato(Integer id, Integer id_pedido, Integer id_plato, Integer cantidad, Double precio){
+        this.id = id;
+        this.id_pedido = id_pedido;
+        this.id_plato = id_plato;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
 }

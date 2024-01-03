@@ -1,4 +1,4 @@
-package com.elbh.atencion.entidades;
+package com.elbh.atencion.entities;
 
 import java.sql.Timestamp;
 

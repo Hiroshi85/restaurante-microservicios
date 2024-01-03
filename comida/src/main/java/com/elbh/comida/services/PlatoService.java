@@ -32,7 +32,7 @@ public class PlatoService {
             null,
             new Categoria(platoDto.getIdCategoria(), null)
         );
-        return platoRepo.save(plato);
+        return platoRepo.saveAndFlush(plato);
     }
 
     public void deletePlato(Integer id){

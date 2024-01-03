@@ -1,5 +1,7 @@
 package com.elbh.detalle_pedido.entidades.models;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Plato {
-    private int id;
+public class PlatoResponse {
+    private Integer id;
+
     private String descripcion;
+    private Double precio;
+
+    private Timestamp createdAt;
     private String categoria;
+
 }

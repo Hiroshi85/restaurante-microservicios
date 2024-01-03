@@ -1,4 +1,4 @@
-package com.elbh.atencion.entidades;
+package com.elbh.atencion.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
