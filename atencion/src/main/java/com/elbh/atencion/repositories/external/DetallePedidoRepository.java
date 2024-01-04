@@ -16,7 +16,7 @@ public class DetallePedidoRepository {
     public List<DetallePedido> saveAll(List<DetallePedido> detalles){
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<List<DetallePedido>> request = new HttpEntity<>(detalles);
-        ResponseEntity<List<DetallePedido>> result = restTemplate.exchange("http://localhost:8092/all", HttpMethod.POST, request , new ParameterizedTypeReference<List<DetallePedido>>() {});   
+        ResponseEntity<List<DetallePedido>> result = restTemplate.exchange("http://localhost:8092/detalle_pedido/all", HttpMethod.POST, request , new ParameterizedTypeReference<List<DetallePedido>>() {});   
         if(!result.getStatusCode().is2xxSuccessful()){
             return null;
         }
@@ -25,7 +25,7 @@ public class DetallePedidoRepository {
 
     public List<DetallePedido> getByIdPedido(Integer idPedido){
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<List<DetallePedido>> result = restTemplate.exchange("http://localhost:8092/pedido/"+idPedido, HttpMethod.GET, null , new ParameterizedTypeReference<List<DetallePedido>>() {});   
+        ResponseEntity<List<DetallePedido>> result = restTemplate.exchange("http://localhost:8092/detalle_pedido/"+idPedido, HttpMethod.GET, null , new ParameterizedTypeReference<List<DetallePedido>>() {});   
         if(!result.getStatusCode().is2xxSuccessful()){
             return null;
         }

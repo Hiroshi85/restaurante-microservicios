@@ -46,7 +46,8 @@ public class PedidoService {
         }
 
         //guardar detalles
-        List<DetallePedido> detalles = detalleRepo.saveAll(pedidoConDetalle.getDetalles());
+        detalleRepo.saveAll(pedidoConDetalle.getDetalles());
+        List<DetallePedido> detalles = detalleRepo.getByIdPedido(pedido.getId());
         PedidoConDetalle pcd = new PedidoConDetalle(
             pedido.getId(),
             pedido.getMesa().getId(),

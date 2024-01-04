@@ -7,11 +7,12 @@ import com.elbh.atencion.services.PedidoService;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RequiredArgsConstructor
@@ -20,9 +21,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PedidoController {
     private final PedidoService service;
     
-    @GetMapping
-    public PedidoConDetalle getPedido(@RequestParam Integer id) {
-        return service.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<PedidoConDetalle> getPedido(@PathVariable Integer id) {
+        PedidoConDetalle pedido = service.findById(id);
+        if(pedido == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(pedido);
     }
 
     @PostMapping

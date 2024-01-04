@@ -12,7 +12,7 @@ public class PlatoRespository {
     public PlatoResponse findById(Integer id) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<PlatoResponse> response
-          = restTemplate.getForEntity("http://localhost:8092/platos/"+id, PlatoResponse.class);
+          = restTemplate.getForEntity("http://localhost:8091/platos/"+id, PlatoResponse.class);
         if(response.getStatusCode() != HttpStatus.OK){
             return null;
         }
