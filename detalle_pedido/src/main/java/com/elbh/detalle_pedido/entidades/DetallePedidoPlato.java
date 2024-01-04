@@ -9,16 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DetallePedidoPlato {
     private Integer id;
-    private Integer id_pedido;
-    private Integer id_plato;
+    private Integer idPedido;
+    private Integer idPlato;
     private Integer cantidad;
-    private String descripcion;
+    private String plato;
     private Double precio;
 
     public DetallePedidoPlato(Integer id, Integer id_pedido, Integer id_plato, Integer cantidad, Double precio){
         this.id = id;
-        this.id_pedido = id_pedido;
-        this.id_plato = id_plato;
+        this.idPedido = id_pedido;
+        this.idPlato = id_plato;
         this.cantidad = cantidad;
         this.precio = precio;
     }

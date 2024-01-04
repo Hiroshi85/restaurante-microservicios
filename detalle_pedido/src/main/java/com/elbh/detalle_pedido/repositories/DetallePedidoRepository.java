@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface DetallePedidoRepository extends JpaRepository<DetallePedido, Integer>{
-    List<DetallePedido> findById_pedido(Integer id_pedido);
+    List<DetallePedido> findByIdPedido(Integer id_pedido);
 }

@@ -20,28 +20,37 @@ public class DetallePedidoService {
     private final PlatoRespository platoRepo;
 
     public ArrayList<DetallePedidoPlato> getAllByIdPedido(Integer id_pedido) {
-        List<DetallePedido> lista = repo.findById_pedido(id_pedido);
+        List<DetallePedido> lista = repo.findByIdPedido(id_pedido);
         ArrayList<DetallePedidoPlato> newLista = new ArrayList<>();
         for (DetallePedido detallePedido : lista) {
             DetallePedidoPlato detalle = new DetallePedidoPlato(
                 detallePedido.getId(),
-                detallePedido.getId_pedido(),
-                detallePedido.getId_plato(),
+                detallePedido.getIdPedido(),
+                detallePedido.getIdPlato(),
                 detallePedido.getCantidad(),
                 detallePedido.getPrecio()
             );
-            PlatoResponse pr = platoRepo.findById(detallePedido.getId_plato());
-            detalle.setDescripcion(pr.getDescripcion());
+            PlatoResponse pr = platoRepo.findById(detallePedido.getIdPlato());
+            detalle.setPlato(pr.getDescripcion());
             newLista.add(detalle);
         }
         return newLista;
     }
 
     public DetallePedido save(DetallePedido detallePedido) {
-        PlatoResponse pr = platoRepo.findById(detallePedido.getId_plato());
+        PlatoResponse pr = platoRepo.findById(detallePedido.getIdPlato());
         detallePedido.setId(null);
         detallePedido.setPrecio(pr.getPrecio());
         return repo.save(detallePedido);
+    }
+
+    public List<DetallePedido> saveAll(List<DetallePedido> lista) {
+        for (DetallePedido detallePedido : lista) {
+            PlatoResponse pr = platoRepo.findById(detallePedido.getIdPlato());
+            detallePedido.setId(null);
+            detallePedido.setPrecio(pr.getPrecio());
+        }
+        return repo.saveAll(lista);
     }
 
     public DetallePedido findById(Integer id) {

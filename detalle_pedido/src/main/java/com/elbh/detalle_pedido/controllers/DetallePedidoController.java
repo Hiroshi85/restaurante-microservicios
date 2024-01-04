@@ -1,7 +1,8 @@
 package com.elbh.detalle_pedido.controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ public class DetallePedidoController {
     private final DetallePedidoService service;
 
     @GetMapping("/{id}")
-    public ArrayList<DetallePedidoPlato> show(@PathVariable Integer id){
+    public List<DetallePedidoPlato> show(@PathVariable Integer id){
         val list = service.getAllByIdPedido(id);
         return list;
     }
@@ -32,6 +33,12 @@ public class DetallePedidoController {
     @PostMapping
     public DetallePedido save(@RequestBody DetallePedido detallePedido){
         return service.save(detallePedido);
+    }
+
+    @PostMapping("/all")
+    public ResponseEntity<List<DetallePedido>> saveAll(@RequestBody List<DetallePedido> lista){
+        val list = service.saveAll(lista);
+        return ResponseEntity.ok(list);
     }
 
     @DeleteMapping("/{id}")
