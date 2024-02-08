@@ -34,4 +34,12 @@ public class PedidoController {
     public PedidoConDetalle savePedidoConDetalle(@RequestBody PedidoConDetalle body){
         return service.savePedidoConDetalle(body);
     }
+
+    @GetMapping("/pdf/{id}")
+    public ResponseEntity<byte[]> getPedidoPdf(@PathVariable Integer id) {
+        byte[] pdf = service.getPedidoPDF(id);
+        return ResponseEntity.ok()
+            .header("Content-Disposition", "attachment; filename=boleta-"+id+".pdf")
+            .body(pdf);
+    }
 }
