@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body class="bg-gray-100">
+    <div th:replace="layouts/nav :: nav"></div>
+    <div class="w-full h-full p-5 md:p-10">
+        <h2 class="text-2xl font-semibold mb-4">Formulario</h2>
+
+    <form th:action="@{/productos}" method="post">
+
+        <div class="sm:flex gap-4">
+            <!-- Campo de Descripción -->
+            <div class="mb-4 flex-1">
+                <label for="descripcion" class="block text-gray-700 font-bold mb-2">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion" class="form-input w-full rounded p-1 border">
+            </div>
+
+            <!-- Campo de Precio Unitario -->
+            <div class="mb-4 flex-1">
+                <label for="precioUnitario" class="block text-gray-700 font-bold mb-2">Precio Unitario:</label>
+                <input type="number" id="precioUnitario" name="precioUnitario" class="form-input w-full rounded p-1 border">
+            </div>
+        </div>
+        <!-- Combobox de Categorías -->
+        <div class="mb-4">
+            <label for="categoria" class="block text-gray-700 font-bold mb-2">Categoría:</label>
+            <select id="categoria" name="categoria" class="form-select w-full rounded p-1 border">
+                <option th:each="it : ${categorias}" th:value="${it.id}" th:text="${it.descripcion}"></option>
+            </select>
+        </div>
+
+        <!-- Botón de Enviar -->
+        <div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Enviar</button>
+        </div>
+
+    </form>
+    </div>
+</body>
+</html>

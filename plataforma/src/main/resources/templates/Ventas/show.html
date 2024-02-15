@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'Factura #'+${venta.id} "></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            nav, button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div th:replace="layouts/nav :: nav"></div>
+    <div class="w-full h-full p-5 md:p-10">
+        <div class="p-4 bg-white border rounded" id="comprobante">
+            <!-- Encabezado -->
+            <div class="flex justify-between mb-4">
+                <div>
+                    <h1 class="text-lg font-bold">Mi Tienda</h1>
+                    
+                </div>
+                <div>
+                    <p class="text-sm">Nro. Comprobante: <span th:text="${venta.id}"></span></p>
+                    <hr>
+                    <p class="text-sm">RUC: 1234567890</p> <!-- Falso RUC de prueba -->
+                </div>
+            </div>
+    
+            <!-- Detalles del Cliente -->
+            <div class="mb-4">
+                <p class="text-sm">Cliente: <span th:text="${venta.comprador}"></span></p>
+                <p class="text-sm">Fecha: <span th:text="${#dates.format(venta.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
+            </div>
+    
+            <!-- Tabla de Detalles -->
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="py-2">Nro Item</th>
+                        <th class="py-2">Producto</th>
+                        <th class="py-2">Cantidad</th>
+                        <th class="py-2">Precio Unitario</th>
+                        <th class="py-2">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="detalle, iterStat : ${detalles}" class="border-t text-center">
+                        <td class="py-2" th:text="${iterStat.index + 1}"></td>
+                        <td class="py-2" th:text="${detalle.producto.descripcion}"></td>
+                        <td class="py-2" th:text="${detalle.cantidad}"></td>
+                        <td class="py-2" th:text="${detalle.precioUnitario}"></td>
+                        <td class="py-2" th:text="${'S/ ' + (detalle.precioUnitario * detalle.cantidad)}"></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="border-t text-center font-bold">
+                        <td colspan="3"></td>
+                        <td class="py-2">Total</td>
+                        <td class="py-2" th:text="'S/ ' + ${total}"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="flex w-full p-5 justify-center">
+        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="imprimir">
+            Imprimir
+        </button>
+    </div>
+</body>
+<script>
+    const imprimirButton = document.getElementById('imprimir');
+    imprimirButton.addEventListener('click', () => {
+        window.print();
+    });
+    
+</script>
+</html>

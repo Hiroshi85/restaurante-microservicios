@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div th:replace="layouts/nav :: nav"></div>
+  
+    <!-- Main Section -->
+    <div >
+    
+      <form th:action="@{/comprar}" class="container mx-auto mt-8 flex flex-col justify-center align-items px-5 py-2" method="post">
+        <div class="flex gap-4">
+          <div class="flex flex-col flex-1">
+            <label for="cliente">Cliente</label>
+            <input type="text" name="cliente" class="p-2 rounded mr-1 mt-1" placeholder="Su nombre">
+          </div>
+          <div class="flex flex-col flex-1">
+            <label for="cliente">Mesa</label>
+            <select name="mesa" id="mesa">
+              <option th:each="mesa: ${mesas}" value="${mesa.id}" th:text="${mesa.codigo}"></option>
+            </select>
+          </div>
+          <div class="flex-1">
+            <button type="submit" id="botonCompra" disabled class="h-full bg-blue-300 text-white font-bold py-2 px-4 rounded">Comprar</button>
+          </div>
+            
+            
+        </div>
+        <!-- Product Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-3  gap-4 mt-4">
+            <!-- Card 1 -->
+            <div class="bg-white p-4 shadow-md" th:each="plato: ${platos}">
+                <h2 class="text-lg font-semibold mb-2" th:text="${plato.descripcion}"></h2>
+                <p class="text-gray-600 mb-2" th:text="'Precio: S/'+${plato.precio}"></p>
+                <p class="text-gray-600 mb-2" th:text="'Categoría: '+ ${plato.categoria.descripcion}"></p>
+                <div class="flex w-100">
+                    <input type="number" class="border p-2 mb-2" min="1" value="1" placeholder="Cantidad">
+                    <div class="flex flex-col justify-center align-center">
+                        <input name="carrito" type="checkbox" class="flex-1 w-100 text-white py-1 mx-2 rounded" th:value="${plato.id}"></input>
+                        <label for="carrito" class="flex-1">Añadir al carrito</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </form>
+      
+  
+    </div>
+  
+  </body>
+  <script>
+
+    const checkboxes = document.querySelectorAll('input[name="carrito"]');
+    const botonCompra = document.getElementById('botonCompra');
+
+    document.addEventListener("DOMContentLoaded", () => {
+      actualizarEstadoBoton();      
+    });
+
+    
+
+    // Agrega un event listener a cada checkbox
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', (e)=> 
+      {
+        actualizarEstadoBoton();
+        verificarCompra(e.target);
+      });
+    });
+
+    function verificarCompra(e){
+      if(e.checked){
+        e.parentNode.parentNode.children[0].setAttribute('name', 'cantidad');
+      }else{
+        e.parentNode.parentNode.children[0].removeAttribute('name');
+      }
+     
+    }
+
+    // Función para actualizar el estado del botón
+    function actualizarEstadoBoton() {
+      // Verifica si al menos un checkbox está seleccionado
+      const alMenosUnoSeleccionado = [...checkboxes].some(checkbox => checkbox.checked);
+        if(alMenosUnoSeleccionado){
+            botonCompra.classList.remove("bg-blue-300");
+            botonCompra.classList.add("hover:bg-blue-400", "bg-blue-500");
+        }else{
+            botonCompra.classList.add("bg-blue-300");
+            botonCompra.classList.remove("hover:bg-blue-400", "bg-blue-500");
+        }
+      // Habilita o deshabilita el botón según el resultado
+      botonCompra.disabled = !alMenosUnoSeleccionado;
+    }
+  </script>
+</html>
