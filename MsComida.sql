@@ -7,6 +7,8 @@ create table categorias(
     descripcion varchar(50) not null
 );
 
+insert into categorias(descripcion) values ('Entradas'), ('Platos principales'), ('Postres'), ('Jugos'), ('Bebidas calientes'), ('Sandwiches');
+
 create table platos(
     id int primary key auto_increment,
     descripcion varchar(50) not null,
