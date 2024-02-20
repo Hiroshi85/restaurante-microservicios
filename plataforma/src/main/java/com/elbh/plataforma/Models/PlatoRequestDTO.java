@@ -5,9 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class VPRequest {
-    private Integer idProducto;
-    private Integer cantidad;
+@AllArgsConstructor
+public class PlatoRequestDTO {
+    private String descripcion;
+    private Double precio;
+    private Integer idCategoria;
 }

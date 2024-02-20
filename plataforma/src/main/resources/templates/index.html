@@ -15,13 +15,9 @@
       <form th:action="@{/comprar}" class="container mx-auto mt-8 flex flex-col justify-center align-items px-5 py-2" method="post">
         <div class="flex gap-4">
           <div class="flex flex-col flex-1">
-            <label for="cliente">Cliente</label>
-            <input type="text" name="cliente" class="p-2 rounded mr-1 mt-1" placeholder="Su nombre">
-          </div>
-          <div class="flex flex-col flex-1">
             <label for="cliente">Mesa</label>
             <select name="mesa" id="mesa">
-              <option th:each="mesa: ${mesas}" value="${mesa.id}" th:text="${mesa.codigo}"></option>
+              <option th:each="mesa: ${mesas}" th:value="${mesa.id}" th:text="${mesa.codigo}"></option>
             </select>
           </div>
           <div class="flex-1">
@@ -31,7 +27,7 @@
             
         </div>
         <!-- Product Cards -->
-        <div class="grid grid-cols-2 md:grid-cols-3  gap-4 mt-4">
+        <div class="grid grid-cols-2 lg:grid-cols-3  gap-4 mt-4">
             <!-- Card 1 -->
             <div class="bg-white p-4 shadow-md" th:each="plato: ${platos}">
                 <h2 class="text-lg font-semibold mb-2" th:text="${plato.descripcion}"></h2>

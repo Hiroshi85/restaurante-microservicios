@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div th:replace="layouts/nav :: nav"></div>
+  
+    <!-- Main Section -->
+    <div >
+    
+        <!-- Product Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5  gap-4 mt-4 px-10 py-4">
+            <!-- Card 1 -->
+            <div class="bg-white p-4 shadow-md" th:each="pedido: ${pedidos}">
+                <h2 class="text-lg font-semibold mb-2" th:text="'Nº'+${pedido.id}"></h2>
+                <p class="text-gray-600 mb-2" th:text="'Fecha y hora: '+ ${#dates.format(pedido.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></p>
+                <a th:href="@{/pedidos/}+${pedido.id}" class="text-blue-600 dark:text-blue-500 hover:underline">Ver detalles</a>
+            </div>
+        </div>
+      
+  
+    </div>
+  
+  </body>
+
+</html>

@@ -9,63 +9,45 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import com.elbh.plataforma.Models.Categoria;
-import com.elbh.plataforma.Models.DetalleCompletoDTO;
-import com.elbh.plataforma.Models.Producto;
-import com.elbh.plataforma.Models.ProductoPostDTO;
-import com.elbh.plataforma.Models.VPRequest;
-import com.elbh.plataforma.Models.Venta;
-import com.elbh.plataforma.Models.VentaProducto;
+import com.elbh.plataforma.Models.Mesa;
+import com.elbh.plataforma.Models.Pedido;
+import com.elbh.plataforma.Models.PedidoConDetalle;
+import com.elbh.plataforma.Models.Plato;
+import com.elbh.plataforma.Models.PlatoRequestDTO;
 
 import lombok.NoArgsConstructor;
 
 @Repository
 @NoArgsConstructor
 public class ProductoRepository {
-    public List<Producto> getProductos(){
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<List<Producto>> rateResponse =
-        restTemplate.exchange("http://localhost:8000/productos/",
-                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Producto>>() {
-            });
 
-        List<Producto> listaProductos = rateResponse.getBody();
-        return listaProductos;
-    }
-
-    public ResponseEntity<Venta> createVenta(Venta venta){
+    public ResponseEntity<PedidoConDetalle> createPedidoConDetalle(PedidoConDetalle pd){
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Venta> result = restTemplate.postForEntity("http://localhost:8000/ventas/", venta, Venta.class);
+        ResponseEntity<PedidoConDetalle> result = restTemplate.postForEntity("http://localhost:8000/atencion/", pd, PedidoConDetalle.class);
         return result;
     }
 
-    public Venta getVenta(Integer id){
+    public ResponseEntity<PedidoConDetalle> getPedidoConDetalle(Integer id){
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Venta> response = restTemplate.getForEntity("http://localhost:8000/ventas/"+id, Venta.class);
-        Venta venta = response.getBody();
-        return venta;
+        ResponseEntity<PedidoConDetalle> response = restTemplate.getForEntity("http://localhost:8000/atencion/"+id, PedidoConDetalle.class);
+        return response;
     }
 
-    public List<DetalleCompletoDTO> getDetalles(Integer id){
+    public List<Pedido> getPedidos(){
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<List<DetalleCompletoDTO>> rateResponse =
-        restTemplate.exchange("http://localhost:8000/ventas/"+id+"/detalle",
-                    HttpMethod.GET, null, new ParameterizedTypeReference<List<DetalleCompletoDTO>>() {
+        ResponseEntity<List<Pedido>> rateResponse =
+        restTemplate.exchange("http://localhost:8000/atencion/",
+                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Pedido>>() {
             });
 
-        List<DetalleCompletoDTO> listaDetalles = rateResponse.getBody();
-        return listaDetalles;
-    }
-
-    public ResponseEntity<VentaProducto> createVentaProducto(Integer idVenta, VPRequest vpRequest){
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<VentaProducto> result = restTemplate.postForEntity("http://localhost:8000/ventas/"+idVenta+"/detalle", vpRequest, VentaProducto.class);
-        return result;
+        List<Pedido> listaPedidos = rateResponse.getBody();
+        return listaPedidos;
     }
 
     public List<Categoria> getCategorias(){
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List<Categoria>> rateResponse =
-        restTemplate.exchange("http://localhost:8000/productos/categorias",
+        restTemplate.exchange("http://localhost:8000/comida/categorias",
                     HttpMethod.GET, null, new ParameterizedTypeReference<List<Categoria>>() {
             });
 
@@ -73,9 +55,10 @@ public class ProductoRepository {
         return listaCategorias;
     }
 
-    public ResponseEntity<Producto> createProducto(ProductoPostDTO producto){
+    public ResponseEntity<Plato> createPlato(PlatoRequestDTO plato){
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Producto> result = restTemplate.postForEntity("http://localhost:8000/productos/", producto, Producto.class);
+        ResponseEntity<Plato> result = restTemplate.postForEntity("http://localhost:8000/comida/platos", plato, Plato.class);
         return result;
     }
+
 }

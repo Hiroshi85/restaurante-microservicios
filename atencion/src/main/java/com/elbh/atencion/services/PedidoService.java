@@ -1,15 +1,12 @@
 package com.elbh.atencion.services;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.hibernate.mapping.Table;
-import org.hibernate.query.Page;
 import org.springframework.stereotype.Service;
 
 import com.elbh.atencion.Dto.DetallePedido;
@@ -20,9 +17,7 @@ import com.elbh.atencion.repositories.MesaRepository;
 import com.elbh.atencion.repositories.PedidoRepository;
 import com.elbh.atencion.repositories.external.DetallePedidoRepository;
 import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
@@ -41,6 +36,11 @@ public class PedidoService {
     private final PedidoRepository repo;
     private final MesaRepository mesaRepo;
     private final DetallePedidoRepository detalleRepo;
+
+    public List<Pedido> listarPedidos(){
+        List<Pedido> pedidos = repo.findAll();
+        return pedidos;
+    }
 
     public PedidoConDetalle findById(Integer id){
         Pedido pedido = repo.findById(id).orElse(null);

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="'Factura #'+${venta.id} "></title>
+    <title th:text="'Factura #'+${pedido.id} "></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @media print {
@@ -20,11 +20,11 @@
             <!-- Encabezado -->
             <div class="flex justify-between mb-4">
                 <div>
-                    <h1 class="text-lg font-bold">Mi Tienda</h1>
+                    <h1 class="text-lg font-bold">Mi Restaurante</h1>
                     
                 </div>
                 <div>
-                    <p class="text-sm">Nro. Comprobante: <span th:text="${venta.id}"></span></p>
+                    <p class="text-sm">Nro. Comprobante: <span th:text="${pedido.id}"></span></p>
                     <hr>
                     <p class="text-sm">RUC: 1234567890</p> <!-- Falso RUC de prueba -->
                 </div>
@@ -32,8 +32,8 @@
     
             <!-- Detalles del Cliente -->
             <div class="mb-4">
-                <p class="text-sm">Cliente: <span th:text="${venta.comprador}"></span></p>
-                <p class="text-sm">Fecha: <span th:text="${#dates.format(venta.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
+                <p class="text-sm">Cliente: <span>GUEST</span></p>
+                <p class="text-sm">Fecha: <span th:text="${#dates.format(pedido.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
             </div>
     
             <!-- Tabla de Detalles -->
@@ -48,12 +48,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="detalle, iterStat : ${detalles}" class="border-t text-center">
+                    <tr th:each="detalle, iterStat : ${pedido.detalles}" class="border-t text-center">
                         <td class="py-2" th:text="${iterStat.index + 1}"></td>
-                        <td class="py-2" th:text="${detalle.producto.descripcion}"></td>
+                        <td class="py-2" th:text="${detalle.plato}"></td>
                         <td class="py-2" th:text="${detalle.cantidad}"></td>
-                        <td class="py-2" th:text="${detalle.precioUnitario}"></td>
-                        <td class="py-2" th:text="${'S/ ' + (detalle.precioUnitario * detalle.cantidad)}"></td>
+                        <td class="py-2" th:text="${detalle.precio}"></td>
+                        <td class="py-2" th:text="${'S/ ' + (detalle.precio * detalle.cantidad)}"></td>
                     </tr>
                 </tbody>
                 <tfoot>

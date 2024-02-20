@@ -3,9 +3,12 @@ package com.elbh.atencion.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elbh.atencion.Dto.PedidoConDetalle;
+import com.elbh.atencion.entities.Pedido;
 import com.elbh.atencion.services.PedidoService;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +31,15 @@ public class PedidoController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(pedido);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Pedido>> listarPedido() {
+        List<Pedido> pedidos = service.listarPedidos();
+        if(pedidos == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(pedidos);
     }
 
     @PostMapping

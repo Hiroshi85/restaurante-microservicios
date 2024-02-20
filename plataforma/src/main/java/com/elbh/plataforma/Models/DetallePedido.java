@@ -5,12 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class DetalleCompletoDTO {
+@NoArgsConstructor
+public class DetallePedido {
     private Integer id;
-    private Integer idVenta;
+    private Integer idPedido;
+    private Integer idPlato;
+    private String plato;
     private Integer cantidad;
-    private Double precioUnitario;
-    private Producto producto;   
+    private Double precio;
 }

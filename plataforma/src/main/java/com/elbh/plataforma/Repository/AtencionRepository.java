@@ -25,4 +25,10 @@ public class AtencionRepository {
         List<Mesa> listaProductos = rateResponse.getBody();
         return listaProductos;
     }
+
+    public ResponseEntity<Mesa> createMesa(Mesa mesa){
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Mesa> result = restTemplate.postForEntity("http://localhost:8000/atencion/mesas", mesa, Mesa.class);
+        return result;
+    }
 }

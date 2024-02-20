@@ -10,7 +10,14 @@
     <nav class="bg-gray-800 p-4 text-white" th:fragment="nav">
         <div class="container mx-auto flex justify-between">
             <a th:href="@{/}" class="font-bold text-xl">Mi Restaurante</a>
-            <a th:href="@{/platos}" class="font-bold text-xl">Platos</a>
+            <div>
+                <a th:href="@{/platos}" class="font-bold text-xl">Platos</a>
+                <span >&nbsp;&nbsp;</span>
+                <a th:href="@{/mesas}" class="font-bold text-xl">Mesas</a>
+                <span >&nbsp;&nbsp;</span>
+                <a th:href="@{/pedidos}" class="font-bold text-xl">Pedidos</a>
+            </div>
+            
         </div>
     </nav>
 </body>

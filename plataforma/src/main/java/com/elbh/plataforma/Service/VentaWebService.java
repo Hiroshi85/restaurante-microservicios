@@ -6,19 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.elbh.plataforma.Models.Categoria;
-import com.elbh.plataforma.Models.DetalleCompletoDTO;
 import com.elbh.plataforma.Models.Mesa;
+import com.elbh.plataforma.Models.Pedido;
+import com.elbh.plataforma.Models.PedidoConDetalle;
 import com.elbh.plataforma.Models.Plato;
-import com.elbh.plataforma.Models.Producto;
-import com.elbh.plataforma.Models.ProductoPostDTO;
-import com.elbh.plataforma.Models.VPRequest;
-import com.elbh.plataforma.Models.Venta;
-import com.elbh.plataforma.Models.VentaProducto;
+import com.elbh.plataforma.Models.PlatoRequestDTO;
+
 import com.elbh.plataforma.Repository.AtencionRepository;
 import com.elbh.plataforma.Repository.PlatoRepository;
 import com.elbh.plataforma.Repository.ProductoRepository;
 
-import ch.qos.logback.core.model.Model;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -28,41 +25,29 @@ public class VentaWebService {
     private final PlatoRepository platoRepo;
     private final AtencionRepository atencionRepo;
 
-    public List<Producto> getProductosIndex(Model model){
-         List<Producto> elementos = pRepo.getProductos();
-         return elementos;
-    }
-
     public List<Plato> getPlatosIndex(){
         List<Plato> elementos = platoRepo.getPlatos();
         return elementos;
    }
-
 
     public List<Mesa> getMesas(){
         List<Mesa> elementos = atencionRepo.getMesas();
         return elementos;
     }
 
-    public Venta createVenta(Venta venta){
-        ResponseEntity<Venta> respuesta = pRepo.createVenta(venta);
-        System.out.println(respuesta.getBody().toString());
+    public List<Pedido> listarPedidos(){
+        List<Pedido> elementos = pRepo.getPedidos();
+        return elementos;
+    }
+
+    public PedidoConDetalle createPedidoConDetalle(PedidoConDetalle pd){
+        ResponseEntity<PedidoConDetalle> respuesta = pRepo.createPedidoConDetalle(pd);
         return respuesta.getBody();
     }
 
-    public VentaProducto createVentaProducto(Integer idVenta, VPRequest vpRequest){
-        ResponseEntity<VentaProducto> respuesta = pRepo.createVentaProducto(idVenta, vpRequest);
+    public PedidoConDetalle getPedidoConDetalle(Integer id){
+        ResponseEntity<PedidoConDetalle> respuesta = pRepo.getPedidoConDetalle(id);
         return respuesta.getBody();
-    }
-
-    public Venta getVenta(Integer id){
-        Venta venta = pRepo.getVenta(id);
-        return venta;
-    }
-
-    public List<DetalleCompletoDTO> getDetalles(Integer id){
-        List<DetalleCompletoDTO> detalles = pRepo.getDetalles(id);
-        return detalles;
     }
 
     public List<Categoria> getCategorias(){
@@ -70,10 +55,14 @@ public class VentaWebService {
         return categorias;
     }
 
-    public Producto createProducto(ProductoPostDTO producto){
-        ResponseEntity<Producto> respuesta = pRepo.createProducto(producto);
+    public Plato createPlato(PlatoRequestDTO plato){
+        ResponseEntity<Plato> respuesta = pRepo.createPlato(plato);
         System.out.println(respuesta.getBody().toString());
         return respuesta.getBody();
     }
 
+    public Mesa createMesa(Mesa mesa){
+        ResponseEntity<Mesa> respuesta = atencionRepo.createMesa(mesa);
+        return respuesta.getBody();
+    }
 }
